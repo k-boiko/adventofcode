@@ -23,7 +23,7 @@ func Day1(part string) {
 		{word: "eight", num: "8"},
 		{word: "nine", num: "9"},
 	}
-	for _, line := range strings.Split(string(prod), "\n") {
+	for _, line := range strings.Split(string(d1_prod), "\n") {
 		lineNumStr := ""
 		state := ""
 		for _, char := range line {
@@ -49,13 +49,13 @@ func Day1(part string) {
 	fmt.Printf("part %s: %d", part, sum)
 }
 
-const test1 = `
+const d1_test1 = `
 1abc2
 pqr3stu8vwx
 a1b2c3d4e5f
 treb7uchet`
 
-const test2 = `two1nine
+const d1_test2 = `two1nine
 eightwothree
 abcone2threexyz
 xtwone3four
@@ -63,7 +63,7 @@ xtwone3four
 zoneight234
 7pqrstsixteen`
 
-const prod = `four9one
+const d1_prod = `four9one
 bbzhsmnmtf8kftwosevenxfkssgrcjthree
 6pkkcddsixsixjgnjvdtjtwo
 4four45seven7nine7two
