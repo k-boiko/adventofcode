@@ -8,17 +8,19 @@ import (
 )
 
 func Day2(part string) {
-	matchedIndexes := []int{}
+	gameNumsSum := 0
+	powsSum := 0
+
 	colorsMaxValue := map[string]int{
 		"red":   12,
 		"green": 13,
 		"blue":  14,
 	}
-	powsSum := 0
+
 	for _, line := range strings.Split(string(d2_test), "\n") {
 		r, _ := regexp.Compile("Game (\\d+): (.*)")
 		match := r.FindStringSubmatch(line)
-		groupNumber, _ := strconv.Atoi(match[1])
+		gameNumber, _ := strconv.Atoi(match[1])
 		isImpossible := false
 		colorsMinValue := map[string]int{
 			"red":   0,
@@ -49,12 +51,12 @@ func Day2(part string) {
 		powsSum += pow
 
 		if !isImpossible {
-			matchedIndexes = append(matchedIndexes, groupNumber)
+			gameNumsSum += gameNumber
 		}
 	}
 
 	if part == "1" {
-		fmt.Printf("%#v\n", Sum(matchedIndexes))
+		fmt.Printf("%#v\n", gameNumsSum)
 	}
 	if part == "2" {
 		fmt.Printf("%#v\n", powsSum)
