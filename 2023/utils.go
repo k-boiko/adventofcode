@@ -7,3 +7,21 @@ func Sum(arr []int) int {
 	}
 	return sum
 }
+
+func Pow(arr map[string]int) int {
+	pow := 1
+	for _, valueInt := range arr {
+		pow *= valueInt
+	}
+	return pow
+}
+
+func IsNumericChar(char byte) bool {
+	return char >= '0' && char <= '9'
+}
+
+func MergeMaps(m1 *map[string]int, m2 map[string]int) {
+	for k, v := range m2 {
+		(*m1)[k] = v
+	}
+}
