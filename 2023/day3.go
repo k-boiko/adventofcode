@@ -35,7 +35,7 @@ func Day3(part string) {
 			}
 
 			if part == "2" && len(toAdd) == 2 {
-				adjacentNums[fmt.Sprint(row, ".", col)] = Pow(toAdd)
+				adjacentNums[fmt.Sprint(row, ".", col)] = PowMap(toAdd)
 			}
 		}
 	}

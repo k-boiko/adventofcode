@@ -8,7 +8,7 @@ func Sum(arr []int) int {
 	return sum
 }
 
-func Pow(arr map[string]int) int {
+func PowMap(arr map[string]int) int {
 	pow := 1
 	for _, valueInt := range arr {
 		pow *= valueInt
