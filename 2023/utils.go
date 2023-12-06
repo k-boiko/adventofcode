@@ -1,5 +1,7 @@
 package main
 
+import "strconv"
+
 func Sum(arr []int) int {
 	sum := 0
 	for _, valueInt := range arr {
@@ -24,4 +26,9 @@ func MergeMaps(m1 *map[string]int, m2 map[string]int) {
 	for k, v := range m2 {
 		(*m1)[k] = v
 	}
+}
+
+func ParseInt(s string) int {
+	num, _ := strconv.Atoi(s)
+	return num
 }
