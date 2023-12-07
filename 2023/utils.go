@@ -1,11 +1,22 @@
 package main
 
-import "strconv"
+import (
+	"regexp"
+	"strconv"
+)
 
 func Sum(arr []int) int {
 	sum := 0
 	for _, valueInt := range arr {
 		sum += valueInt
+	}
+	return sum
+}
+
+func Pow(arr []int) int {
+	sum := 1
+	for _, valueInt := range arr {
+		sum *= valueInt
 	}
 	return sum
 }
@@ -31,4 +42,15 @@ func MergeMaps(m1 *map[string]int, m2 map[string]int) {
 func ParseInt(s string) int {
 	num, _ := strconv.Atoi(s)
 	return num
+}
+
+func getAllNumbers(s string) []int {
+	matchDigits := regexp.MustCompile(`\d+`)
+	strNums := matchDigits.FindAllString(s, -1)
+	nums := []int{}
+	for _, n := range strNums {
+		i, _ := strconv.Atoi(n)
+		nums = append(nums, i)
+	}
+	return nums
 }
