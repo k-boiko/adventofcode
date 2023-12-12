@@ -65,6 +65,8 @@ func d8part2(moves []string, nodes map[string]Node) {
 			break
 		}
 	}
+
+	fmt.Printf("%d\n", findLCM(ghostToZSteps, len(moves)))
 }
 
 func Day8(part string) {

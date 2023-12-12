@@ -55,31 +55,10 @@ func getAllNumbers(s string) []int {
 	return nums
 }
 
-// Ghat GPT's code -- start --
-// Функція для знаходження НСД за допомогою алгоритму Евкліда
-func gcd(a, b int) int {
-	for b != 0 {
-		a, b = b, a%b
+func findLCM(arr []int, divider int) int {
+	result := 1
+	for _, steps := range arr {
+		result *= steps / divider
 	}
-	return a
+	return result * divider
 }
-
-// Функція для знаходження НСК двох чисел
-func lcm(a, b int) int {
-	return a * b / gcd(a, b)
-}
-
-// Функція для знаходження НСК масиву чисел
-func findLCM(arr []int) int {
-	if len(arr) < 2 {
-		return 0
-	}
-
-	result := arr[0]
-	for i := 1; i < len(arr); i++ {
-		result = lcm(result, arr[i])
-	}
-	return result
-}
-
-// Ghat GPT's code -- end --
