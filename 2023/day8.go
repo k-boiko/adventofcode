@@ -11,18 +11,7 @@ type Node struct {
 	R string
 }
 
-func Day8(part string) {
-	moves := strings.Split(d8_prod_moves, "")
-	nodes := map[string]Node{}
-	matchNodeConfig := regexp.MustCompile(`[A-Z]{3}`)
-	for _, line := range strings.Split(d8_prod_nodes, "\n") {
-		node := matchNodeConfig.FindAllString(line, -1)
-		nodes[node[0]] = Node{
-			L: node[1],
-			R: node[2],
-		}
-	}
-
+func d8part1(moves []string, nodes map[string]Node) {
 	steps := 0
 	current := "AAA"
 	for true {
@@ -41,6 +30,63 @@ func Day8(part string) {
 	fmt.Printf("%d\n", steps)
 }
 
+func d8part2(moves []string, nodes map[string]Node) {
+	ghosts := make([]string, 0)
+	for n, _ := range nodes {
+		if strings.HasSuffix(n, "A") {
+			ghosts = append(ghosts, n)
+		}
+	}
+
+	ghostToZSteps := make([]int, len(ghosts))
+	ghostsOnZ := 0
+	steps := 0
+	for true {
+		move := moves[steps%len(moves)] // L || R
+
+		for i, current := range ghosts {
+			if move == "R" {
+				ghosts[i] = nodes[current].R
+			} else {
+				ghosts[i] = nodes[current].L
+			}
+
+			if strings.HasSuffix(current, "Z") {
+				if ghostToZSteps[i] == 0 {
+					ghostToZSteps[i] = steps
+					ghostsOnZ++
+				}
+			}
+		}
+
+		steps++
+
+		if ghostsOnZ == len(ghosts) {
+			break
+		}
+	}
+}
+
+func Day8(part string) {
+	moves := strings.Split(d8_prod_moves, "")
+	nodes := map[string]Node{}
+	matchNodeConfig := regexp.MustCompile(`[A-Z]{3}`)
+	for _, line := range strings.Split(d8_prod_nodes, "\n") {
+		node := matchNodeConfig.FindAllString(line, -1)
+		nodes[node[0]] = Node{
+			L: node[1],
+			R: node[2],
+		}
+	}
+
+	if part == "1" {
+		d8part1(moves, nodes)
+	}
+	if part == "2" {
+		d8part2(moves, nodes)
+	}
+}
+
 const d8_test1_moves = "RL"
 const d8_test1_nodes = `AAA = (BBB, CCC)
 BBB = (DDD, EEE)
@@ -54,6 +100,16 @@ const d8_test2_moves = "LLR"
 const d8_test2_nodes = `AAA = (BBB, BBB)
 BBB = (AAA, ZZZ)
 ZZZ = (ZZZ, ZZZ)`
+
+const d8_test3_moves = "LR"
+const d8_test3_nodes = `11A = (11B, XXX)
+11B = (XXX, 11Z)
+11Z = (11B, XXX)
+22A = (22B, XXX)
+22B = (22C, 22C)
+22C = (22Z, 22Z)
+22Z = (22B, 22B)
+XXX = (XXX, XXX)`
 
 const d8_prod_moves = "LRRLRLRRRLLRLRRRLRLLRLRLRRLRLRRLRRLRLRLLRRRLRRLLRRRLRRLRRRLRRLRLRLLRRLRLRRLLRRRLLLRRRLLLRRLRLRRLRLLRRRLRRLRRRLRRLLRRRLRRRLRRRLRLRRLRLRRRLRRRLRRLRLRRLLRRRLRRLLRRLRRLRLRLRRRLRLLRRRLRRLRRRLLRRLLLLLRRRLRRLLLRRRLRRRLRRLRLLLLLRLRRRLRRRLRLRRLLLLRLRRRLLRRRLRRRLRLRLRRLRRLRRLRLRLLLRLRRLRRLRRRLRRRLLRRRR"
 const d8_prod_nodes = `RBX = (TMF, KTP)
