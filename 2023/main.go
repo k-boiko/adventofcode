@@ -15,6 +15,7 @@ func main() {
 		"5": Day5,
 		"6": Day6,
 		"7": Day7,
+		"8": Day8,
 	}
 
 	days[args[0]](args[1])
