@@ -45,7 +45,7 @@ func ParseInt(s string) int {
 }
 
 func getAllNumbers(s string) []int {
-	matchDigits := regexp.MustCompile(`\d+`)
+	matchDigits := regexp.MustCompile(`-?\d+`)
 	strNums := matchDigits.FindAllString(s, -1)
 	nums := []int{}
 	for _, n := range strNums {
